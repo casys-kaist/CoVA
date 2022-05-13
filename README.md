@@ -15,7 +15,7 @@ Current version of CoVA runs inside docker image, where this cloned git reposito
 ```shell
 git clone --recurse-submodule https://github.com/jinuhwang/CoVA
 cd CoVA
-# or if you already cloned without submodule, 
+# or if you already cloned without submodule,
 git submodule update --init --recursive
 ```
 
@@ -33,7 +33,7 @@ git submodule update --init --recursive
 
    ```shell
    cd docker
-   
+
    # Builds the image for CoVA based on ./docker/Dockerfile
    ./build.sh
    ```
@@ -106,8 +106,8 @@ make install
 
 ##### 1.3.3.1. Main CoVA plugins (from `cova-rs/gst-plugins`)
 
-* `metapreprocess`: Preprocess metadata extracted from entropy decoder 
-* `bboxcc`: Transforms BlobNet mask into bounding box using connected component algorithm 
+* `metapreprocess`: Preprocess metadata extracted from entropy decoder
+* `bboxcc`: Transforms BlobNet mask into bounding box using connected component algorithm
 * `sorttracker`: Tracks the bounding boxes using [SORT](https://arxiv.org/abs/1602.00763) algorithm
 * `cova`: Filters frames to decode based on the tracked objects
 * [For training] `tfrecordsink`: Used to pack BlobNet training data into Tensorflow TFRecord format
@@ -177,7 +177,7 @@ Otherwise, specify the custom path later on.
 
 #### 2.2.1.1. Download pretrained weights
 
-1. Download the pretrained model from the following Google drive [link](https://drive.google.com/drive/folders/1FFRVI37-SVruK2Lt0nKkkQ8JQDnKciEE?usp=sharing). 
+1. Download the pretrained model from the following Google drive [link](https://drive.google.com/drive/folders/1FFRVI37-SVruK2Lt0nKkkQ8JQDnKciEE?usp=sharing).
 
 2. Place the downloaded file under `/workspace/model/onnx_model/blobnet/`
 3. Move on  to 2.2.2.
@@ -223,7 +223,7 @@ Place the output frozen model directory under `/workspace/model/tf_model/blobnet
 cd /workspace/model
 # The following command will generate onnx file
 # From /workspace/model/tf_model to /workspace/model/onnx_model
-python -m invoke tf2onnx FROZEN_PATH 
+python -m invoke tf2onnx FROZEN_PATH
 ```
 
 ### 2.2.2. Convert frozen model into TensorRT engine
@@ -244,7 +244,7 @@ cd /workspace/experiment/cova
 python launch.py INPUT_PATH OUTPUT_DIR DATASET
 ```
 
-You can configure number of entropy decoder / number of concurrent models / number of model batch size in the `config.yaml`. 
+You can configure number of entropy decoder / number of concurrent models / number of model batch size in the `config.yaml`.
 
 The structure of resulting output directory is as the following.
 
@@ -267,7 +267,7 @@ cd /workspace/parse
 python launch.py DATASET OUTPUT_DIR
 ```
 
-As a result, two files will be created in the `OUTPUT_DIR` which contain the result of binary predicate query of the target object. You can check the video at the returned timestamp (showed in nanosecond) to find the object appearing. 
+As a result, two files will be created in the `OUTPUT_DIR` which contain the result of binary predicate query of the target object. You can check the video at the returned timestamp (showed in nanosecond) to find the object appearing.
 
 The main results for elapsed time (for Figure 8), filtering rate (for Table 3) and accuracy metric (for Table 4)  will be provided on the stdout.
 
@@ -278,7 +278,8 @@ The main results for elapsed time (for Figure 8), filtering rate (for Table 3) a
 * Pixel Domain FG Mask Extraction: [MoG](https://ieeexplore.ieee.org/document/1333992) based object detection
 * Compressed Domain Mask Extraction: BlobNet based object detection
 
-![demo/demo.gif](https://github.com/anonymous-cova/cova/blob/master/demo/demo.gif?raw=true)
+![demo.gif](https://github.com/casys-kaist/CoVA/blob/master/demo/demo.gif?raw=true)
+
 
 ### Issue
 
