@@ -1,0 +1,119 @@
+input_file: {input_path}
+last: full
+sink: fakesink
+
+width: 1280
+height: 720
+timestep: 4
+
+####################
+queue_size: 0
+
+##########
+# entdec #
+##########
+num_entdec: 32
+entdec_add_queue: False
+
+##################
+# metapreprocess #
+##################
+metapreprocess_gamma: 1
+metapreprocess_add_queue: False
+
+#####################
+# nvvideoconvert_up #
+#####################
+nvvideoconvert_up_add_queue: False
+nvvideoconvert_up_output_buffers: 512
+
+####################
+# nvstreammux_mask #
+####################
+num_mask: 16
+mask_batch_size: 512
+mask_pool_size: 1024
+mask_batched_push_timeout: -1
+nvstreammux_mask_add_queue: False
+
+################
+# nvinfer_mask #
+###############i#
+nvinfer_mask_config: /workspace/config/blobnet/{dataset}_b512.txt
+nvinfer_mask_add_queue: True
+
+######################
+# nvstreamdemux_mask #
+######################
+nvstreamdemux_mask_add_queue: False
+
+############
+# maskcopy #
+############
+maskcopy_add_queue: False
+
+##########
+# bboxcc #
+##########
+bboxcc_add_queue: False
+bboxcc_cc_threshold: 1
+
+########
+# cova #
+########
+cova_alpha: 0
+cova_beta: 0
+cova_infer_i: True
+cova_sort_iou: 0.1
+cova_sort_maxage: {maxage}
+cova_sort_minhits: {minhit}
+cova_add_queue: True
+cova_port: {track_port}
+
+##########
+# funnel #
+##########
+num_nvdec: 32
+funnel_add_queue: False
+
+#########
+# nvdec #
+#########
+nvdec_num_extra_surfaces: 4
+nvdec_add_queue: False
+
+############
+# identity #
+############
+identity_add_queue: False
+
+###################
+# nvstreammux_dnn #
+###################
+num_dnn: 4
+dnn_batch_size: 2
+dnn_pool_size: 32
+dnn_batched_push_timeout: 10
+nvstreammux_dnn_add_queue: True
+
+###############
+# nvinfer_dnn #
+###############
+nvinfer_dnn_config: /workspace/config/dnn/yolov4_b2.txt
+nvinfer_dnn_add_queue: True
+
+#####################
+# nvstreamdemux_dnn #
+#####################
+nvstreamdemux_dnn_add_queue: False
+
+###############
+# probefilter #
+###############
+probefilter_add_queue: False
+
+############
+# tcpprobe #
+############
+tcpprobe_port: {dnn_port}
+tcpprobe_add_queue: False

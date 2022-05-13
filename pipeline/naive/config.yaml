@@ -1,0 +1,64 @@
+######################
+# Pipeline Structure
+# h264parse -> h264demxuer -> nvdec -> nvstreammux
+#   -> nvinfer -> nvstreammdemux -> nvdsbbox -> funnel -> bboxsink
+######################
+last: 'full'
+sink: 'bboxsink'
+sink_location: '/tmp/debug.csv'
+
+####################
+#                  #
+# Input Properties #
+#                  #
+####################
+input_file: /ssd2/h264/archie/day1-10m.mp4
+width: 1280
+height: 720
+
+######################
+#                    #
+# Element Properties #
+#                    #
+######################
+queue_size: 10000
+
+#########
+# nvdec #
+#########
+num_nvdec: 1
+nvdec_drop_frame_interval: 30
+nvdec_num_extra_surfaces: 24
+nvdec_add_queue: False
+
+###################
+# nvstreammux_dnn #
+###################
+num_dnn: 1
+dnn_batch_size: 1
+dnn_pool_size: 32
+dnn_batched_push_timeout: -1
+nvstreammux_dnn_add_queue: False
+
+###############
+# nvinfer_dnn #
+###############
+nvinfer_dnn_config: /workspace/config/dnn/yolov4_b2.txt
+nvinfer_dnn_add_queue: False
+
+#####################
+# nvstreamdemux_dnn #
+#####################
+nvstreamdemux_dnn_add_queue: False
+
+############
+# nvdsbbox #
+############
+nvdsbbox_add_queue: True
+
+##########
+# funnel #
+##########
+funnel_add_queue: False
+
+

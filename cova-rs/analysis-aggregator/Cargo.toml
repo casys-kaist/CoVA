@@ -1,0 +1,19 @@
+[package]
+name = "analysis-aggregator"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+serde = { version = "1.0.127", features = ["derive"] }
+serde_json = "1.0.59"
+tokio = { version = "1.15.0", features = ["full"] }
+futures = "0.3.21"
+log = { version = "0.4.14", features = ["release_max_level_info"] }
+env_logger = "0.9.0"
+clap = { version = "3.0.0-rc.11", features = ["derive"] }
+bbox = { path="../bbox" }
+csv = "1.1.6"
+bytes = "1.1.0"
+tokio-util = { version = "0.7.0", features = ["codec"] }
+itertools = "0.10.3"

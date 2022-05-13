@@ -1,0 +1,12 @@
+[submodule "third_parties/DeepStream-Yolo"]
+	path = third_parties/DeepStream-Yolo
+	url = https://github.com/marcoslucianops/DeepStream-Yolo.git
+[submodule "third_parties/gst-libav"]
+	path = third_parties/gst-libav
+	url = https://github.com/GStreamer/gst-libav.git
+[submodule "third_parties/tensorrt_demos"]
+	path = third_parties/tensorrt_demos
+	url = https://github.com/jkjung-avt/tensorrt_demos
+[submodule "third_parties/FFmpeg"]
+	path = third_parties/FFmpeg
+	url = https://github.com/jinuhwang/FFmpeg

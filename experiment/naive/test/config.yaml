@@ -1,0 +1,51 @@
+######################
+# Pipeline Structure
+# filesrc -> qtdemux -> h264parse -> nvdec -> nvstreammux_dnn
+#   -> nvinfer_dnn -> nvstreamdemux_dnn -> nvdsbbox -> bboxsink
+######################
+last: full
+sink: bboxsink
+sink_location: test/dnn.csv
+
+####################
+# Input Properties #
+####################
+input_file: /workspace/demo/1m.mp4
+width: 1280
+height: 720
+
+####################
+# Queue Properties #
+####################
+queue_size: 10000
+
+#########
+# nvdec #
+#########
+nvdec_drop_frame_interval: 0
+nvdec_num_extra_surfaces: 24
+nvdec_add_queue: False
+
+###################
+# nvstreammux_dnn #
+###################
+dnn_batch_size: 1
+dnn_pool_size: 32
+dnn_batched_push_timeout: -1
+nvstreammux_dnn_add_queue: False
+
+###############
+# nvinfer_dnn #
+###############
+nvinfer_dnn_config: /workspace/config/dnn/yolov4_b2.txt
+nvinfer_dnn_add_queue: False
+
+#####################
+# nvstreamdemux_dnn #
+#####################
+nvstreamdemux_dnn_add_queue: False
+
+############
+# nvdsbbox #
+############
+nvdsbbox_add_queue: True

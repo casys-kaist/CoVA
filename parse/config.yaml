@@ -1,0 +1,38 @@
+amsterdam:
+  days:
+    day1:
+      video_path: /workspace/data/video/amsterdam/day1.mp4
+      gt_path: /workspace/data/baseline/amsterdam/day1/dnn.csv
+      cova_path: /workspace/data/cova/amsterdam/day1
+    day2:
+      video_path: /workspace/data/video/amsterdam/day2.mp4
+      gt_path: /workspace/data/baseline/amsterdam/day2/dnn.csv
+      cova_path: /workspace/data/cova/amsterdam/day2
+    day3:
+      video_path: /workspace/data/video/amsterdam/day3.mp4
+      gt_path: /workspace/data/baseline/amsterdam/day3/dnn.csv
+      cova_path: /workspace/data/cova/amsterdam/day3
+
+  # Tiny parked car at the corner, Bump mislooked as car, Bump mislooked as car
+  exclude: '[((390, 130), (785, 310)), ((770, 305), (855, 360)), ((900, 315), (1045, 400))]'
+  targets: [ car ]
+  region: lower right
+
+archie:
+  days:
+    day1:
+      video_path: /workspace/data/video/archie/day1.mp4
+      gt_path: /workspace/data/baseline/archie/day1/dnn.csv
+      cova_path: /workspace/data/cova/archie/day1
+    day2:
+      video_path: /workspace/data/video/archie/day2.mp4
+      gt_path: /workspace/data/baseline/archie/day2/dnn.csv
+      cova_path: /workspace/data/cova/archie/day2
+    day3:
+      video_path: /workspace/data/video/archie/day3.mp4
+      gt_path: /workspace/data/baseline/archie/day3/dnn.csv
+      cova_path: /workspace/data/cova/archie/day3
+  # Tiny parked truck in the middle
+  exclude: '[((-20, -20), (830, 140))]'
+  targets: [ bus ]
+  region: upper left

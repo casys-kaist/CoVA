@@ -1,0 +1,10 @@
+**/.clangd/
+**/__pycache__/
+*.deb
+*.csv
+*.o
+*.so
+*.txt
+*.engine
+/data/
+**/.cache/

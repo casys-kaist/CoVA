@@ -1,0 +1,37 @@
+[package]
+name = "cova"
+version = "0.1.0"
+edition = "2018"
+authors = ["Anonymous CoVA <anonymouscova@gmail.com>"]
+repository = "https://github.com/anonymouscova/cova-rs"
+license = "MIT/Apache-2.0"
+description = "CoVA Plugin"
+
+[dependencies]
+gst = { version = "0.19.0", package = "gstreamer", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", rev = "98e12e8"}
+gst-base = { version = "0.19.0", package = "gstreamer-base", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", rev = "98e12e8"}
+gst-video = { version = "0.19.0", package = "gstreamer-video", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs", rev = "98e12e8"}
+once_cell = "1.0"
+nom = "7.0.0"
+url = "2.2.2"
+tfrecord = "0.13.0"
+ndarray-npy = "0.8"
+ndarray = "0.15.3"
+sort = { path = "../sort" }
+log = { version="0.4.14", features = ["release_max_level_off"] }
+bbox = { path = "../bbox" }
+opencv = "0.53.1"
+csv = "1.1.6"
+tokio-util = { version = "0.7.0", features = ["codec"] }
+bytes = "1.1.0"
+
+[lib]
+name = "gstcova"
+crate-type = ["cdylib", "rlib"]
+path = "src/lib.rs"
+
+[build-dependencies]
+gst-plugin-version-helper = {  git = "https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs" }
+
+[dev-dependencies]
+gst-check = { package = "gstreamer-check", git = "https://gitlab.freedesktop.org/gstreamer/gstreamer-rs" }

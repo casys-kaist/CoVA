@@ -1,0 +1,42 @@
+[property]
+process-mode=1
+batch-size=2
+gpu-id=0
+net-scale-factor=0.0039215697906911373
+#0=RGB, 1=BGR
+model-color-format=0
+
+workspace-size=8000
+
+# Model path
+custom-network-config= /workspace/third_parties/tensorrt_demos/yolo/yolov4-608.cfg
+model-file=/workspace/third_parties/tensorrt_demos/yolo/yolov4-608.weights
+# engine path
+model-engine-file=/workspace/model/trt_model/rnn/yolov4_b2_fp16.engine
+
+labelfile-path=/workspace/third_parties/DeepStream-Yolo/labels.txt
+
+## 0=FP32, 1=INT8, 2=FP16 mode
+network-mode=2
+
+num-detected-classes=80
+gie-unique-id=1
+network-type=0
+force-implicit-batch-dim=1
+## 0=Group Rectangles, 1=DBSCAN, 2=NMS, 3= DBSCAN+NMS Hybrid, 4 = None(No clustering)
+cluster-mode=2
+maintain-aspect-ratio=0
+
+# YOLO Engine
+parse-bbox-func-name=NvDsInferParseYolo
+custom-lib-path=/workspace/third_parties/DeepStream-Yolo/nvdsinfer_custom_impl_Yolo/libnvdsinfer_custom_impl_Yolo.so
+engine-create-func-name=NvDsInferYoloCudaEngineGet
+#scaling-filter=0
+#scaling-compute-hw=0
+
+[class-attrs-all]
+# eps=0.2
+# group-threshold=1
+nms-iou-threshold=0.2
+# threshold=0.7
+# pre-cluster-threshold=0.25

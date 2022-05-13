@@ -1,0 +1,80 @@
+# Gst H264 Demuxer plugin
+
+1. Given H264 stream, split it to request pads
+
+```
+                               +-----------+
+x-h264  =====================> |   h264    | => src_0  x-h264
+(parsed=true)                  |  demuxer  | => ...  
+(stream-format="byte-stream")  |           | => src_N
+(alignment="au")               +-----------+
+```
+
+* h264parse must be set option `config-interval` as `-1`
+* queue element must be set option `max-size-buffers=0 max-size-bytes=0 max-size-time=0`
+
+# Example pipeline
+Just split gops
+```
+gst-launch-1.0                                    \
+filesrc location=/ssd4/high/taipei-hires/day2.mp4 \
+! qtdemux                                         \
+! h264parse config-interval=-1                    \
+! gopsplit name=demux                          \
+                                                  \
+demux.src_0                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! fakesink                                        \
+                                                  \
+demux.src_1                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! fakesink                                        \
+                                                  \
+demux.src_2                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! fakesink
+```
+
+Dump each bufs TAG. This pipeline require probefilter.
+```
+GST_DEBUG=probefilter:5                           \
+gst-launch-1.0                                    \
+filesrc location=/ssd4/high/taipei-hires/day2.mp4 \
+! qtdemux                                         \
+! h264parse config-interval=-1                    \
+! gopsplit name=demux                          \
+                                                  \
+demux.src_0                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! probefilter                                     \
+! fakesink                                        \
+                                                  \
+demux.src_1                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! fakesink
+```
+
+Split one video to two video with same length
+```
+gst-launch-1.0                                    \
+filesrc location=./test.mp4 \
+! qtdemux                                         \
+! h264parse config-interval=-1                    \
+! gopsplit name=demux                          \
+                                                  \
+demux.src_0                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! nvv4l2decoder                                   \
+! nvv4l2h264enc                                   \
+! h264parse                                       \
+! qtmux                                           \
+! filesink location= ./test1.mp4                  \
+                                                  \
+demux.src_1                                       \
+! queue max-size-buffers=0 max-size-bytes=0 max-size-time=0 \
+! nvv4l2decoder                                   \
+! nvv4l2h264enc                                   \
+! h264parse                                       \
+! qtmux                                           \
+! filesink location= ./test2.mp4
+```

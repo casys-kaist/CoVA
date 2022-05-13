@@ -1,0 +1,138 @@
+target:
+  # - archie-train
+  # - amsterdam-train
+  # - jackson-train
+  # - rialto-train
+  # - shinjuku-train
+  # - taipei-train
+  - virat-default
+  - virat-angle
+  - virat-parkinglot
+
+datasets:
+  amsterdam-train:
+    video:
+      - /ssd2/h264/amsterdam/train/day1.mp4
+      - /ssd2/h264/amsterdam/train/day2.mp4
+  archie-train:
+    video:
+      - /ssd2/h264/archie/train/day1.mp4
+      - /ssd2/h264/archie/train/day2.mp4
+  # canal-train:
+  #   video:
+  #     - /ssd2/h264/canal/train/day1.mp4
+  #     - /ssd2/h264/canal/train/day2.mp4
+  jackson-train:
+    video:
+      - /ssd2/h264/jackson/train/day1.mp4
+      - /ssd2/h264/jackson/train/day2.mp4
+  taipei-train:
+    video:
+      - /ssd2/h264/taipei/train/day1.mp4
+      - /ssd2/h264/taipei/train/day2.mp4
+  rialto-train:
+    video:
+      - /ssd2/h264/rialto/train/day1.mp4
+      - /ssd2/h264/rialto/train/day2.mp4
+  shinjuku-train:
+    video:
+      - /ssd2/h264/shinjuku/train/day1.mp4
+      - /ssd2/h264/shinjuku/train/day2.mp4
+  amsterdam:
+    video:
+      - /ssd1/amsterdam/day1.mp4
+  archie:
+    video:
+      - /ssd1/archie/day1.mp4
+  jackson:
+    video:
+      - /ssd2/jackson/day1.mp4
+      # - /ssd4/high/jackson-town-square/day2.mp4
+      # - /ssd4/high/jackson-town-square/day3.mp4
+  shinjuku:
+    video:
+      - /ssd3/shinjuku/720p/day1.mp4
+      # - /ssd3/shinjuku/720p/day2.mp4
+      # - /ssd3/shinjuku/720p/day3.mp4
+  taipei:
+    video:
+      - /ssd4/high/taipei-hires/day1.mp4
+      # - /ssd4/high/taipei-hires/day2.mp4
+      # - /ssd4/high/taipei-hires/day3.mp4
+  zurich:
+    video:
+      - /ssd3/zurich/cropped/day1.mp4
+      # - /ssd3/zurich/cropped/day2.mp4
+      # - /ssd3/zurich/cropped/day3.mp4
+  virat-default:
+    video:
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000001.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000002.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000003.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000004.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000006.mp4
+  virat-angle:
+    video:
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000101.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000102.mp4
+  virat-parkinglot:
+    video:
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000200_01_000226_000268.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000200_02_000479_000635.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000200_03_000657_000899.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000200_04_000937_001443.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000200_05_001525_001575.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000200_06_001693_001824.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_00_000018_000380.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_01_000384_000589.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_02_000590_000623.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_03_000640_000672.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_04_000682_000822.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_05_001081_001215.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_06_001354_001397.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_07_001485_001581.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000201_08_001652_001838.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000202_00_000000_000977.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_03_000736_000785.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_04_000903_001086.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_05_001122_001159.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_06_001206_001266.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_07_001341_001458.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_08_001702_001734.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000203_09_001789_001842.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000205_00_000065_000149.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000205_01_000197_000342.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000205_02_000409_000566.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000205_03_000860_000922.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000205_04_000927_001057.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000205_05_001092_001124.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000206_07_001501_001600.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000206_08_001618_001712.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000206_09_001714_001851.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000207_00_000000_000045.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000207_01_000094_000156.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000207_02_000498_000530.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000207_03_000556_000590.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000207_04_000902_000934.mp4
+      - /ssd1/VIRAT/videos_original/VIRAT_S_000207_05_001125_001193.mp4
+
+tasks:
+  transcode:
+    command: >
+      scripts/transcode.sh {input_path} {output_path}
+    input_suffix: .mp4
+    output_dir: /ssd1/VIRAT/transcoded/
+
+  gen-mog:
+    command: >
+      scripts/generate-mog.py {input_path}
+    input_suffix: .mp4
+
+  gen-record:
+    command: >
+      scripts/generate-tfrecord.sh {input_path} {gt_path} {output_path}
+    input_suffix: .mp4
+    output_suffix: .tfrecord
+    gt_suffix: _gt.dump
+    exec: >
+      param["gt_path"] = try_suffix(input_path, task, "gt_suffix")

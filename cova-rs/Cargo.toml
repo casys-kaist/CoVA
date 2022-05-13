@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "gst-plugins",
+    "analysis-aggregator",
+    "sort",
+    "bbox",
+    "nvdsbbox"
+]

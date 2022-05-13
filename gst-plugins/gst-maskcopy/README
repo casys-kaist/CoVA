@@ -1,0 +1,10 @@
+# Gst Probe plugin
+
+1. same as probe. Just pass all data.
+
+```
+    +-----------+
+==> |  probe    | => 
+    |  filter   |
+    +-----------+
+```
