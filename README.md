@@ -1,7 +1,34 @@
 # CoVA: Exploiting Compressed-Domain Analysis to Accelerate Video Analytics
-
-Current version of CoVA runs inside docker image, where this cloned git repository is mounted on `/workspace` inside the docker container.
-
+  * [0. Clone current repository](#0-clone-current-repository)
+  * [1. Installation](#1-installation)
+    + [1.1 Setup docker image for CoVA](#11-setup-docker-image-for-cova)
+      - [1.1.1. Build docker image from source](#111-build-docker-image-from-source)
+      - [1.1.2 or pull image from DockerHub](#112-or-pull-image-from-dockerhub)
+    + [1.2. Launch and attach to the docker container](#12-launch-and-attach-to-the-docker-container)
+    + [1.3. Additional setup steps inside the container](#13-additional-setup-steps-inside-the-container)
+      - [1.3.1. Download pre-trained model weights for YOLOv4](#131-download-pre-trained-model-weights-for-yolov4)
+      - [1.3.2. Install entropy decoder](#132-install-entropy-decoder)
+      - [1.3.3. Install GStreamer plugins](#133-install-gstreamer-plugins)
+        * [1.3.3.1. Main CoVA plugins (from `cova-rs/gst-plugins`)](#1331-main-cova-plugins--from--cova-rs-gst-plugins--)
+        * [1.3.3.2. Other auxiliary plugins (from `gst-plugins`)](#1332-other-auxiliary-plugins--from--gst-plugins--)
+    + [2. Running the pipeline](#2-running-the-pipeline)
+    + [2.0. Download video file](#20-download-video-file)
+    + [2.1. Naive DNN-only pipeline](#21-naive-dnn-only-pipeline)
+    + [2.2. CoVA pipeline](#22-cova-pipeline)
+    + [2.2.1. Getting BlobNet ONNX file](#221-getting-blobnet-onnx-file)
+      - [2.2.1.1. Download pretrained weights](#2211-download-pretrained-weights)
+      - [2.2.1.2. or train model from scratch](#2212-or-train-model-from-scratch)
+        * [2.2.1.2.1. Cut the first few minutes of video to generate training data](#22121-cut-the-first-few-minutes-of-video-to-generate-training-data)
+        * [2.2.1.2.2. Generate background subtraction results for training labels](#22122-generate-background-subtraction-results-for-training-labels)
+        * [2.2.1.2.3. Generate training dataset used for BlobNet training](#22123-generate-training-dataset-used-for-blobnet-training)
+        * [2.2.1.2.4. Training BlobNet](#22124-training-blobnet)
+        * [2.2.1.2.5. Convert frozen model into ONNX format](#22125-convert-frozen-model-into-onnx-format)
+    + [2.2.2. Convert frozen model into TensorRT engine](#222-convert-frozen-model-into-tensorrt-engine)
+    + [2.2.3 Launch CoVA pipeline](#223-launch-cova-pipeline)
+    + [2.2.4 Parsing CoVA result](#224-parsing-cova-result)
+  * [Demo](#demo)
+      - [BlobNet](#blobnet)
+    + [Issue](#issue)
 #### Tested Environment
 
  - NVIDIA RTX 3090
@@ -13,7 +40,7 @@ Current version of CoVA runs inside docker image, where this cloned git reposito
 ## 0. Clone current repository
 
 ```shell
-git clone --recurse-submodule https://github.com/jinuhwang/CoVA
+git clone --recurse-submodule https://github.com/casys-kaist/CoVA
 cd CoVA
 # or if you already cloned without submodule,
 git submodule update --init --recursive
@@ -33,7 +60,6 @@ git submodule update --init --recursive
 
    ```shell
    cd docker
-
    # Builds the image for CoVA based on ./docker/Dockerfile
    ./build.sh
    ```
@@ -58,12 +84,10 @@ All the following steps should be done inside (attached to) the docker container
 
 ```shell
 cd /workspace
-
 # Download pretrained YOLOv4 weights
 pushd third_parties/tensorrt_demos/yolo
 ./download_yolo.sh
 popd
-
 # Build custom Deepstream parser for YOLO
 pushd third_parties/DeepStream-Yolo/nvdsinfer_custom_impl_Yolo
 CUDA_VER=11.4 make
@@ -74,19 +98,16 @@ popd
 
 ```shell
 cd /workspace
-
 # Build modified version of FFmpeg
 pushd third_parties/FFmpeg
 ./configure --enable-shared --disable-static
 make -j`nproc` install
 popd
-
 # Build GStreamer plugin with modified decoder
 pushd third_parties/gst-libav
 meson build
 ninja -C build install
 popd
-
 # Check the plugin is installed correctly.
 gst-inspect-1.0 avdec_h264
 ```
@@ -99,7 +120,6 @@ Once patched `avdec_h264` is installed, it should work as entropy decoder (parti
 
 ```shell
 cd /workspace
-
 # Install all required plugins
 make install
 ```
@@ -147,7 +167,6 @@ Otherwise, specify the custom path later on.
 
 ```shell
 cd experiment/naive
-
 # e.g., python launch.py /workspace/data/video/archie/day1.mp4 /workspace/baseline/archie/day1
 python launch.py INPUT_PATH OUTPUT_DIR
 ```
@@ -180,13 +199,13 @@ Otherwise, specify the custom path later on.
 1. Download the pretrained model from the following Google drive [link](https://drive.google.com/drive/folders/1FFRVI37-SVruK2Lt0nKkkQ8JQDnKciEE?usp=sharing).
 
 2. Place the downloaded file under `/workspace/model/onnx_model/blobnet/`
-3. Move on  to 2.2.2.
+3. Move on  to [2.2.2. Convert frozen model into TensorRT engine](#222-convert-frozen-model-into-tensorrt-engine).
 
 #### 2.2.1.2. or train model from scratch
 
 ##### 2.2.1.2.1. Cut the first few minutes of video to generate training data
 
-```
+```shell
 # e.g., ffmpeg -i original.mp4 -to 0:20:00 -c:v copy train.mp4
 ffmpeg -i INPUT_VIDEO -to TRAIN_DUR -c:v copy OUTPUT_VIDEO
 ```
