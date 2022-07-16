@@ -8,3 +8,4 @@
 *.engine
 /data/
 **/.cache/
+.DS_Store

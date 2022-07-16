@@ -18,17 +18,13 @@
     + [2.2.1. Getting BlobNet ONNX file](#221-getting-blobnet-onnx-file)
       - [2.2.1.1. Download pretrained weights](#2211-download-pretrained-weights)
       - [2.2.1.2. or train model from scratch](#2212-or-train-model-from-scratch)
-        * [2.2.1.2.1. Cut the first few minutes of video to generate training data](#22121-cut-the-first-few-minutes-of-video-to-generate-training-data)
-        * [2.2.1.2.2. Generate background subtraction results for training labels](#22122-generate-background-subtraction-results-for-training-labels)
-        * [2.2.1.2.3. Generate training dataset used for BlobNet training](#22123-generate-training-dataset-used-for-blobnet-training)
-        * [2.2.1.2.4. Training BlobNet](#22124-training-blobnet)
-        * [2.2.1.2.5. Convert frozen model into ONNX format](#22125-convert-frozen-model-into-onnx-format)
     + [2.2.2. Convert frozen model into TensorRT engine](#222-convert-frozen-model-into-tensorrt-engine)
     + [2.2.3 Launch CoVA pipeline](#223-launch-cova-pipeline)
     + [2.2.4 Parsing CoVA result](#224-parsing-cova-result)
   * [Demo](#demo)
-      - [BlobNet](#blobnet)
-    + [Issue](#issue)
+    
+    - [BlobNet](#blobnet)
+  * [Issue](#issue)
 #### Tested Environment
 
  - NVIDIA RTX 3090
@@ -119,6 +115,8 @@ Once patched `avdec_h264` is installed, it should work as entropy decoder (parti
 #### 1.3.3. Install GStreamer plugins
 
 ```shell
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+
 cd /workspace
 # Install all required plugins
 make install
@@ -282,8 +280,8 @@ You can use `htop` and `nvidia-smi dmon` to confirm the pipeline is running corr
 
 ```shell
 cd /workspace/parse
-# e.g., python launch.py amsterdam /worksapce/data/parsed/amsterdam
-python launch.py DATASET OUTPUT_DIR
+# e.g., python accuracy.py amsterdam /worksapce/data/parsed/amsterdam
+python accuracy.py DATASET OUTPUT_DIR
 ```
 
 As a result, two files will be created in the `OUTPUT_DIR` which contain the result of binary predicate query of the target object. You can check the video at the returned timestamp (showed in nanosecond) to find the object appearing.
@@ -300,6 +298,6 @@ The main results for elapsed time (for Figure 8), filtering rate (for Table 3) a
 ![demo.gif](https://github.com/casys-kaist/CoVA/blob/master/demo/demo.gif?raw=true)
 
 
-### Issue
+## Issue
 
 If you have any issue while running the script, please file an issue on the GitHub page or let us know by email (contact: [jwhwang@casys.kaist.ac.kr](jwhwang@casys.kaist.ac.kr) and we will investigate and fix the issue.
