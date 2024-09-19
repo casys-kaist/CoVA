@@ -1,4 +1,5 @@
-# CoVA: Exploiting Compressed-Domain Analysis to Accelerate Video Analytics
+# CoVA: Exploiting Compressed-Domain Analysis to Accelerate Video Analytics [USENIX ATC 22]
+# 2022 Anual 
   * [0. Clone current repository](#0-clone-current-repository)
   * [1. Installation](#1-installation)
     + [1.1 Setup docker image for CoVA](#11-setup-docker-image-for-cova)
@@ -301,3 +302,16 @@ The main results for elapsed time (for Figure 8), filtering rate (for Table 3) a
 ## Issue
 
 If you have any issue while running the script, please file an issue on the GitHub page or let us know by email (contact: [jwhwang@casys.kaist.ac.kr](jwhwang@casys.kaist.ac.kr) and we will investigate and fix the issue.
+
+## Reference
+
+If you need to cite our CoVA repository, please use the following reference:
+```
+@inproceedings{hwang2022cova,
+  title={$\{$CoVA$\}$: Exploiting $\{$Compressed-Domain$\}$ Analysis to Accelerate Video Analytics},
+  author={Hwang, Jinwoo and Kim, Minsu and Kim, Daeun and Nam, Seungho and Kim, Yoonsung and Kim, Dohee and Sharma, Hardik and Park, Jongse},
+  booktitle={2022 USENIX Annual Technical Conference (USENIX ATC 22)},
+  pages={707--722},
+  year={2022}
+}
+```
